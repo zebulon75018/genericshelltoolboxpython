@@ -5,6 +5,10 @@ This project provide a toolbox to make an app shell terminal with command are wr
 
 ![After Launch](screenshot1.jpg)
 
+Ls : Display image.
+
+![Ls ](screenshot2.jpg)
+
 
 Dependencies:
 * python 
