@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Ptty terminal emulator example</title>
+    <style type="text/css">
+        html,body {height:100%;width:100%;margin:0;padding:0;}
+    
+        
+        .flex-container {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-flow: row wrap;
+        justify-content: space-around;
+        }
+        
+        .flex-item {
+        background: tomato;
+        padding: 5px;
+        width: 200px;
+        height: 150px;
+        margin-top: 10px;
+        line-height: 150px;
+        color: white;
+        font-weight: bold;
+        font-size: 3em;
+        text-align: center;
+        }	
+    </style>
+</head>
+<body>
+    <div id="terminal" ></div>
+      <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/simplelightbox/1.17.2/simplelightbox.css" rel="stylesheet"/>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/simplelightbox/1.17.2/simple-lightbox.js"></script>
+    <script src="ptty.jquery.js"></script>
+    <script>
+        var $ptty = null;
+    $(document).ready(function(){
+       
+        // Start ptty
+        $ptty = $('#terminal').Ptty(
+        );
+        
+        // Register a command.
+        $ptty.register('command', {
+            name : 'hello',
+            method : function(cmd){
+                cmd.out = '<h1>Hello World!</h1>';
+                return cmd;
+            },
+            help : 'A demo command.'
+        });
+    });
+    
+    function addtext(txt) {
+        $ptty.echo(txt,true);
+        //console.log($ptty);
+    }
+    
+    function setPrompt(txt) {
+        //console.log($ptty);
+        $ptty.change_settings({ ps:txt} );
+    }
+    </script>
+</body>
+</html>
