@@ -3,15 +3,7 @@ Generic Shell Toolbox in Python the display on html terminal emulation ( multi p
 
 This project provide a toolbox to make an app shell terminal with command are write in python as plugin class in cmds directory  
 
-![After Launch](screenshot1.jpg)
-
-Ls : Display image.
-
-![Ls ](screenshot2.jpg)
-
-If you click on image.
-![Lightbox](screenshot3.jpg)
-
+![After Launch](screenshot4.gif)
 
 
 Dependencies:
