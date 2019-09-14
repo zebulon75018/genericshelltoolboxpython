@@ -19,3 +19,11 @@ html/js
 
 * jquery 
 * simplelightbox
+
+### Command 
+clear internal of js ptty
+ls 
+
+
+### Todo 
+A lot of thing
