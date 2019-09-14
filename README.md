@@ -21,8 +21,8 @@ html/js
 * simplelightbox
 
 ### Command 
-clear internal of js ptty
-ls 
+* clear internal of js ptty
+* ls 
 
 
 ### Todo 
