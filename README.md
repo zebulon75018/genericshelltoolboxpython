@@ -9,6 +9,10 @@ Ls : Display image.
 
 ![Ls ](screenshot2.jpg)
 
+If you click on image.
+![Lightbox](screenshot3.jpg)
+
+
 
 Dependencies:
 * python 
