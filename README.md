@@ -5,3 +5,13 @@ Generic Shell Toolbox in Python the display on html terminal emulation ( multi p
 
 ![After Launch](screenshot1.jpg)
 
+
+Dependencies:
+* python 
+* pyside
+* PySide.QtWebKit
+
+html/js
+
+* jquery 
+* simplelightbox
