@@ -1,7 +1,10 @@
 # genericshelltoolboxpython
 Generic Shell Toolbox in Python the display on html terminal emulation ( multi platform )
 
-This project provide a toolbox to make an app shell terminal with command are write in python as plugin class in cmds directory  
+This project provide a toolbox to make an app shell terminal with command are written in python as plugin class in cmds directory.
+
+Then this commands could be invoke in the sheel window , the resultat could be Html showing the pseudo terminal.
+The scrollbar will automaticly set to bottom.
 
 ![After Launch](screenshot4.gif)
 
