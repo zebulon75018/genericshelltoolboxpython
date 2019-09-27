@@ -7,7 +7,13 @@ class ls(object):
         
     def match(self, name):
         return type(self).__name__ == name
-        
+    
+    def getshorthelp(self):
+        return "ls : list files."
+
+    def gethelp(self):
+        return "ls : list files."
+
     def execute(self, lstcmd, page):
         for elm in glob.glob(os.path.join(os.getcwd(),"*.*")):
             #print(elm)

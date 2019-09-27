@@ -40,13 +40,23 @@ class pluginManager:
 class _LoggedPage(QWebPage):
     obj = [] # synchronous
     commandRecieved = Signal(str) 
+    helpNeeded = Signal(str)
+    tabPressed = Signal(str)
+
     def javaScriptConsoleMessage(self, msg, line, source):
         l = msg.split(",")
         
         self.obj = l
-        if line == 770:
-            self.commandRecieved.emit(msg)
+        if msg[:3] =="TAB":
+            self.tabPressed.emit(msg[3:])
+
+        elif msg[:3] =="CMD":
+            if msg[3:7] == "help":
+                self.helpNeeded.emit(msg[3:])    
+            else:
+                self.commandRecieved.emit(msg[3:])
         print ('JS: %s line %d: %s' % (source, line, msg))
+
 
 class Example(QtGui.QFrame):
 
@@ -68,6 +78,9 @@ class Example(QtGui.QFrame):
         self.page = _LoggedPage()
         #page.newData.connect(onNewData)
         self.page.commandRecieved.connect(self.commandRecieved)
+        self.page.helpNeeded.connect(self.helpNeeded)
+        self.page.tabPressed.connect(self.tabPressed)
+        
         plot_view.setPage(self.page)
         #plot_path = 'test.html'
         dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -94,17 +107,33 @@ class Example(QtGui.QFrame):
 
     def addImageConsole(self, elm):
         #self.page.currentFrame().evaluateJavaScript("addtext('%s : <img src=\"%s\" width=\"100px\"/>')" % (os.path.basename(elm), elm.replace("\\","/")))
-        self.page.currentFrame().evaluateJavaScript("addtext('<div class=\"gallery\"><a href=\"%s\"><img src=\"%s\" alt=\"%s\" width=100px />%s</a></div>')" % (elm.replace("\\","/"), elm.replace("\\","/"),os.path.basename(elm),os.path.basename(elm)))
+        self.page.currentFrame().evaluateJavaScript("addtext('<div class=\"gallery\"><a href=\"file:///%s\"><img src=\"file:///%s\" alt=\"%s\" width=100px />%s</a></div>')" % (elm.replace("\\","/"), elm.replace("\\","/"),os.path.basename(elm),os.path.basename(elm)))
 
 
     def isImage(self, filename):
        return  os.path.splitext(filename)[1].lower() in [".jpg",".png",".gif",".jpeg"]
         
     def registerCmd(self):
-        
         pm = pluginManager(os.path.join(os.path.dirname(__file__),"cmds"))
         for obj in pm.classes():
             self._command.append(obj)
+
+    #################################################################
+    # SLOT
+    #################################################################
+    def helpNeeded(self, cmd):
+        print("Help Needed")
+        lstcmd = cmd.split(" ")
+        if len(lstcmd)>1:
+            for c in self._command:
+                if c.match(lstcmd[1]):
+                    self.addTextConsole(c.gethelp())    
+        else:
+            for c in self._command:
+                self.addTextConsole(c.getshorthelp())
+             
+    def tabPressed(self,cmd):
+        print(cmd)
         
     def commandRecieved(self, cmd):
         #print(cmd)
@@ -122,16 +151,7 @@ class Example(QtGui.QFrame):
         else:
             self.page.currentFrame().evaluateJavaScript("addtext('command not found')")
         """
-    ####################################
-    # command ....
-    ####################################
-    def cd(self, lstarg): 
-        os.chdir(lstarg[1])
-        self.chgPrompt(os.getcwd())
-            
-    def pwd(self, lstarg):
-        self.addTextConsole(os.getcwd())
-        
+
         
 def main():
 

@@ -9,4 +9,9 @@ class cd(object):
         
     def execute(self, lstcmd, page):
         os.chdir(lstcmd[1])
-       
+    
+    def getshorthelp(self):
+        return "cd : change directory"
+
+    def gethelp(self):
+        return "cd : change directory"

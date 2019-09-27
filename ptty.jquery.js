@@ -767,7 +767,7 @@
                             //'<div class="cmd_out">'+cmd_out+'</div>'+
                         '</div>'
                     );
-                    console.log(cmd_last) // interprete by python 
+                    console.log("CMD"+cmd_last) // interprete by python 
                 }else{
                     content.append('<div><div class="cmd_out">'+cmd_out+'</div></div>');
                 }
@@ -858,6 +858,7 @@
             };
 
             var tab_completion = function(current_value) {
+                console.log("TAB"+current_value) // send to python
                 var cmds = [ ];   
                 if( current_value.match( /^[^\s]{0,}$/ ) ) {
                     for(var i in commands ) {
